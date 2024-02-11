@@ -85,7 +85,6 @@ class ChatGPTSkill(FallbackSkill):
         if "key" not in self.settings:
             return False  # ChatGPT not configured yet
         utterance = message.data["utterance"]
-        self.speak_dialog("asking")
         # ask in a thread so fallback doesnt timeout
         self.bus.once("async.chatgpt.fallback", self._async_ask)
         self.bus.emit(
